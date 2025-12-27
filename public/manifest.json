@@ -1,0 +1,80 @@
+{
+  "name": "Trivro AI - AI Marketing Tools",
+  "short_name": "Trivro AI",
+  "description": "Build Meta Ads, Funnels, Landing Pages, Emails, Blogs & SEO Content in minutes with 51+ AI tools.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0E27",
+  "theme_color": "#00D4FF",
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pricing",
+      "short_name": "Plans",
+      "description": "View Trivro AI pricing plans",
+      "url": "/#pricing",
+      "icons": [
+        {
+          "src": "/pricing-icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Tools",
+      "short_name": "Tools",
+      "description": "Explore 51+ AI tools",
+      "url": "/#tools",
+      "icons": [
+        {
+          "src": "/tools-icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
