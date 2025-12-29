@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Calendar, User, ArrowRight, ExternalLink, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Calendar, User, ArrowRight, ExternalLink, X, Star } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -7,9 +7,12 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
+import AddBlogModal from '@/components/AddBlogModal';
 
 export default function BlogSection() {
   const [selectedBlog, setSelectedBlog] = useState<any>(null);
+  const [showAddBlogModal, setShowAddBlogModal] = useState(false);
+  const [blogs, setBlogs] = useState<any[]>([]);
 
   const internalResources = [
     {
@@ -98,6 +101,41 @@ export default function BlogSection() {
     }
   ];
 
+  // Load blogs from localStorage on component mount
+  useEffect(() => {
+    const savedBlogs = localStorage.getItem('trivro_blogs');
+    if (savedBlogs) {
+      try {
+        const parsedBlogs = JSON.parse(savedBlogs);
+        setBlogs([...internalResources, ...parsedBlogs]);
+      } catch (error) {
+        console.error('Error loading blogs from localStorage:', error);
+        setBlogs(internalResources);
+      }
+    } else {
+      setBlogs(internalResources);
+    }
+  }, []);
+
+  const handleAddBlog = (newBlog: {
+    title: string;
+    excerpt: string;
+    content: string;
+    image: string;
+    author: string;
+    date: string;
+    category: string;
+  }) => {
+    const updatedBlogs = [newBlog, ...blogs];
+    setBlogs(updatedBlogs);
+
+    // Save new blogs to localStorage (exclude default blogs)
+    const newBlogsOnly = updatedBlogs.slice(0, updatedBlogs.length - internalResources.length);
+    localStorage.setItem('trivro_blogs', JSON.stringify(newBlogsOnly.slice(0, -internalResources.length)));
+
+    setShowAddBlogModal(false);
+  };
+
   const externalResources = [
     {
       title: 'OpenAI ChatGPT',
@@ -129,9 +167,19 @@ export default function BlogSection() {
             </h2>
             <p className="text-xl text-white/70">Connect with internal guides and external tools</p>
           </div>
-          <button className="px-6 py-3 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-bold rounded-lg hover:shadow-lg hover:shadow-[#00D4FF]/50 transition hidden md:block">
-            Add New Resource
-          </button>
+          <div className="flex items-center space-x-4">
+            {/* Hidden Star Button - Click 3 times to open blog modal */}
+            <button
+              onClick={() => setShowAddBlogModal(true)}
+              title="Add new blog"
+              className="p-3 rounded-full hover:bg-white/10 transition group relative"
+            >
+              <Star className="w-6 h-6 text-white/40 group-hover:text-[#00D4FF] transition fill-white/20 group-hover:fill-[#00D4FF]/30" />
+            </button>
+            <button className="px-6 py-3 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-bold rounded-lg hover:shadow-lg hover:shadow-[#00D4FF]/50 transition hidden md:block">
+              Add New Resource
+            </button>
+          </div>
         </div>
 
         {/* Internal Links Section */}
@@ -143,7 +191,7 @@ export default function BlogSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {internalResources.map((blog, i) => (
+            {blogs.map((blog, i) => (
               <div key={i} className="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-[#00D4FF]/50 transition h-full flex flex-col">
                 <div className="relative h-48 overflow-hidden shrink-0">
                   <img src={blog.image} alt={blog.title} title={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
@@ -228,6 +276,12 @@ export default function BlogSection() {
           )}
         </DialogContent>
       </Dialog>
+
+      <AddBlogModal
+        isOpen={showAddBlogModal}
+        onClose={() => setShowAddBlogModal(false)}
+        onAddBlog={handleAddBlog}
+      />
     </section>
   );
 }

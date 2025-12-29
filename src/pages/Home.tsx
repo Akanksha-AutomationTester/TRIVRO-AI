@@ -5,6 +5,7 @@ import CustomAISection from '@/components/CustomAISection';
 import WhyChooseSection from '@/components/WhyChooseSection';
 import PerfectForSection from '@/components/PerfectForSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import FounderSection from '@/components/FounderSection';
 import DemoCallSection from '@/components/DemoCallSection';
 import PageLayout from '@/components/PageLayout';
 
@@ -18,6 +19,7 @@ export default function Home() {
             <WhyChooseSection />
             <PerfectForSection />
             <TestimonialsSection />
+            <FounderSection />
             <DemoCallSection />
         </PageLayout>
     );
