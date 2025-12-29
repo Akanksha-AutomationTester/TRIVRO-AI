@@ -28,6 +28,7 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
   const [step, setStep] = useState<'passcode' | 'form'>('passcode');
   const [passcode, setPasscode] = useState('');
   const [passcodeError, setPasscodeError] = useState('');
+  const [showCustomCategory, setShowCustomCategory] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     excerpt: '',
@@ -35,7 +36,8 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
     image: '',
     author: '',
     date: new Date().toISOString().split('T')[0],
-    category: 'AI Marketing'
+    category: 'AI Marketing',
+    customCategory: ''
   });
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -62,7 +64,8 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
     if (!formData.image.trim()) errors.image = 'Image URL is required';
     if (!formData.author.trim()) errors.author = 'Author name is required';
     if (!formData.date) errors.date = 'Date is required';
-    if (!formData.category.trim()) errors.category = 'Category is required';
+    const finalCategory = formData.category === 'Other' ? formData.customCategory : formData.category;
+    if (!finalCategory.trim()) errors.category = 'Category is required';
 
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -77,7 +80,17 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
     try {
       // Simulate a slight delay for submission
       await new Promise(resolve => setTimeout(resolve, 500));
-      onAddBlog(formData);
+      const finalCategory = formData.category === 'Other' ? formData.customCategory : formData.category;
+      const blogData = {
+        title: formData.title,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        image: formData.image,
+        author: formData.author,
+        date: formData.date,
+        category: finalCategory
+      };
+      onAddBlog(blogData);
       handleModalClose();
     } catch (error) {
       console.error('Error adding blog:', error);
@@ -90,6 +103,7 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
     setStep('passcode');
     setPasscode('');
     setPasscodeError('');
+    setShowCustomCategory(false);
     setFormData({
       title: '',
       excerpt: '',
@@ -97,7 +111,8 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
       image: '',
       author: '',
       date: new Date().toISOString().split('T')[0],
-      category: 'AI Marketing'
+      category: 'AI Marketing',
+      customCategory: ''
     });
     setFormErrors({});
     onClose();
@@ -111,6 +126,12 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
       ...prev,
       [name]: value
     }));
+    
+    // Show/hide custom category input
+    if (name === 'category') {
+      setShowCustomCategory(value === 'Other');
+    }
+    
     // Clear error for this field
     if (formErrors[name]) {
       setFormErrors(prev => {
@@ -276,20 +297,38 @@ export default function AddBlogModal({ isOpen, onClose, onAddBlog }: AddBlogModa
                       name="category"
                       value={formData.category}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#00D4FF] focus:ring-1 focus:ring-[#00D4FF]/50 transition"
+                      className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-[#00D4FF] focus:ring-1 focus:ring-[#00D4FF]/50 transition [color-scheme:dark]"
                     >
-                      <option value="AI Marketing">AI Marketing</option>
-                      <option value="Funnels">Funnels</option>
-                      <option value="SEO & AEO">SEO & AEO</option>
-                      <option value="AI Content">AI Content</option>
-                      <option value="Paid Ads">Paid Ads</option>
-                      <option value="Business Tips">Business Tips</option>
-                      <option value="Tutorial">Tutorial</option>
+                      <option value="AI Marketing" style={{backgroundColor: '#0A0E27', color: 'white'}}>AI Marketing</option>
+                      <option value="Funnels" style={{backgroundColor: '#0A0E27', color: 'white'}}>Funnels</option>
+                      <option value="SEO & AEO" style={{backgroundColor: '#0A0E27', color: 'white'}}>SEO & AEO</option>
+                      <option value="AI Content" style={{backgroundColor: '#0A0E27', color: 'white'}}>AI Content</option>
+                      <option value="Paid Ads" style={{backgroundColor: '#0A0E27', color: 'white'}}>Paid Ads</option>
+                      <option value="Business Tips" style={{backgroundColor: '#0A0E27', color: 'white'}}>Business Tips</option>
+                      <option value="Tutorial" style={{backgroundColor: '#0A0E27', color: 'white'}}>Tutorial</option>
+                      <option value="Other" style={{backgroundColor: '#0A0E27', color: 'white'}}>Other</option>
                     </select>
                     {formErrors.category && (
                       <p className="text-red-400 text-sm mt-1">{formErrors.category}</p>
                     )}
                   </div>
+
+                  {/* Custom Category Input */}
+                  {showCustomCategory && (
+                    <div className="md:col-span-2">
+                      <label className="block text-sm font-semibold text-white mb-2">
+                        Enter Category Name *
+                      </label>
+                      <input
+                        type="text"
+                        name="customCategory"
+                        value={formData.customCategory}
+                        onChange={handleInputChange}
+                        placeholder="Enter your custom category"
+                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-[#00D4FF] focus:ring-1 focus:ring-[#00D4FF]/50 transition"
+                      />
+                    </div>
+                  )}
 
                   {/* Image URL */}
                   <div className="md:col-span-2">
