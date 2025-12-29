@@ -7,6 +7,22 @@ import {
 
 const BLOG_PASSCODE = "trivro2025";
 
+// Utility function to format date as "Nov 20, 2024"
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString + 'T00:00:00');
+  const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+  return date.toLocaleDateString('en-US', options);
+};
+
+// Utility function to convert from formatted date back to YYYY-MM-DD
+const dateStringToInputFormat = (formattedDate: string): string => {
+  const date = new Date(formattedDate);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 interface BlogData {
   id?: string;
   title: string;
@@ -160,8 +176,10 @@ export default function BlogManagementModal({
     if (!validateForm()) return;
 
     const finalCategory = formData.category === 'Other' ? formData.customCategory : formData.category;
+    const formattedDate = formatDate(formData.date);
     const itemData = {
       ...formData,
+      date: formattedDate,
       category: finalCategory,
       id: editingItem?.id || Date.now().toString()
     };
