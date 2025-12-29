@@ -1,6 +1,6 @@
 export default function YouTubeSection() {
   const handleRegister = () => {
-    window.open('https://calendly.com/cal_live_1fc107e5a1c67eb226ecd2448b29f636', '_blank');
+    window.open('https://cal.com/trivro-ai-9zoyvj/30min', '_blank');
   };
 
   return (
