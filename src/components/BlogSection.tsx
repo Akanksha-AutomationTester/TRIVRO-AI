@@ -257,16 +257,14 @@ export default function BlogSection() {
                   {blogs.length > 1 && (
                     <>
                       <button
-                        onClick={() => setCurrentBlogIndex(Math.max(0, currentBlogIndex - 1))}
-                        disabled={currentBlogIndex === 0}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition z-10"
+                        onClick={() => setCurrentBlogIndex(currentBlogIndex === 0 ? blogs.length - 1 : currentBlogIndex - 1)}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition z-10"
                       >
                         <ChevronLeft className="w-6 h-6" />
                       </button>
                       <button
-                        onClick={() => setCurrentBlogIndex(Math.min(blogs.length - 1, currentBlogIndex + 1))}
-                        disabled={currentBlogIndex === blogs.length - 1}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition z-10"
+                        onClick={() => setCurrentBlogIndex(currentBlogIndex === blogs.length - 1 ? 0 : currentBlogIndex + 1)}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition z-10"
                       >
                         <ChevronRight className="w-6 h-6" />
                       </button>
