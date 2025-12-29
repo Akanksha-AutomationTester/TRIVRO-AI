@@ -5,6 +5,7 @@ import YouTubeSection from './YouTubeSection';
 import WhyChooseSection from './WhyChooseSection';
 import PricingSection from './PricingSection';
 import TestimonialsSection from './TestimonialsSection';
+import FounderSection from './FounderSection';
 import FAQSection from './FAQSection';
 import DemoCallSection from './DemoCallSection';
 import AEOOptimization from './AEOOptimization';
@@ -24,6 +25,7 @@ export default function AppLayout() {
       <TestimonialsSection />
       <FAQSection />
       <DemoCallSection />
+      <FounderSection />
       {/* Hidden SEO optimization component */}
       <AEOOptimization />
       <Footer />
