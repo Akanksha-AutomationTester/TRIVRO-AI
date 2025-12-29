@@ -22,10 +22,10 @@ export default function AppLayout() {
       <YouTubeSection />
       <WhyChooseSection />
       <PricingSection />
+      <FounderSection />
       <TestimonialsSection />
       <FAQSection />
       <DemoCallSection />
-      <FounderSection />
       {/* Hidden SEO optimization component */}
       <AEOOptimization />
       <Footer />
