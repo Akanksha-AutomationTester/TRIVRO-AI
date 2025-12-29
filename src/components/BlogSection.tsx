@@ -7,12 +7,13 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import AddBlogModal from '@/components/AddBlogModal';
+import BlogManagementModal from '@/components/BlogManagementModal';
 
 export default function BlogSection() {
   const [selectedBlog, setSelectedBlog] = useState<any>(null);
-  const [showAddBlogModal, setShowAddBlogModal] = useState(false);
+  const [showManagementModal, setShowManagementModal] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
+  const [externalLinks, setExternalLinks] = useState<any[]>([]);
 
   const internalResources = [
     {
@@ -101,39 +102,54 @@ export default function BlogSection() {
     }
   ];
 
-  // Load blogs from localStorage on component mount
+  // Load blogs and external links from localStorage on component mount
   useEffect(() => {
     const savedBlogs = localStorage.getItem('trivro_blogs');
+    const savedLinks = localStorage.getItem('trivro_external_links');
+    
     if (savedBlogs) {
       try {
         const parsedBlogs = JSON.parse(savedBlogs);
-        setBlogs([...internalResources, ...parsedBlogs]);
+        const allBlogs = parsedBlogs.map((b: any) => ({ ...b, id: b.id || Date.now().toString() }));
+        setBlogs([...internalResources, ...allBlogs]);
       } catch (error) {
         console.error('Error loading blogs from localStorage:', error);
-        setBlogs(internalResources);
+        setBlogs(internalResources.map((b: any) => ({ ...b, id: b.id || Date.now().toString() })));
       }
     } else {
-      setBlogs(internalResources);
+      setBlogs(internalResources.map((b: any) => ({ ...b, id: b.id || Date.now().toString() })));
+    }
+
+    if (savedLinks) {
+      try {
+        const parsedLinks = JSON.parse(savedLinks);
+        const allLinks = parsedLinks.map((l: any) => ({ ...l, id: l.id || Date.now().toString() }));
+        setExternalLinks([...externalResources, ...allLinks]);
+      } catch (error) {
+        console.error('Error loading external links from localStorage:', error);
+        setExternalLinks(externalResources.map((l: any) => ({ ...l, id: l.id || Date.now().toString() })));
+      }
+    } else {
+      setExternalLinks(externalResources.map((l: any) => ({ ...l, id: l.id || Date.now().toString() })));
     }
   }, []);
 
-  const handleAddBlog = (newBlog: {
-    title: string;
-    excerpt: string;
-    content: string;
-    image: string;
-    author: string;
-    date: string;
-    category: string;
-  }) => {
-    const updatedBlogs = [newBlog, ...blogs];
+  const handleUpdateBlogs = (updatedBlogs: any[]) => {
+    // Filter out the default blogs and save only custom ones
+    const customBlogs = updatedBlogs.filter(
+      b => !internalResources.find(ir => ir.title === b.title)
+    );
+    localStorage.setItem('trivro_blogs', JSON.stringify(customBlogs));
     setBlogs(updatedBlogs);
+  };
 
-    // Save new blogs to localStorage (exclude default blogs)
-    const newBlogsOnly = updatedBlogs.slice(0, updatedBlogs.length - internalResources.length);
-    localStorage.setItem('trivro_blogs', JSON.stringify(newBlogsOnly.slice(0, -internalResources.length)));
-
-    setShowAddBlogModal(false);
+  const handleUpdateExternalLinks = (updatedLinks: any[]) => {
+    // Filter out the default links and save only custom ones
+    const customLinks = updatedLinks.filter(
+      l => !externalResources.find(er => er.title === l.title)
+    );
+    localStorage.setItem('trivro_external_links', JSON.stringify(customLinks));
+    setExternalLinks(updatedLinks);
   };
 
   const externalResources = [
@@ -168,10 +184,10 @@ export default function BlogSection() {
             <p className="text-xl text-white/70">Connect with internal guides and external tools</p>
           </div>
           <div className="flex items-center space-x-4">
-            {/* Hidden Star Button - Click to open blog modal */}
+            {/* Hidden Star Button - Opens Blog Management */}
             <button
-              onClick={() => setShowAddBlogModal(true)}
-              title="Add new blog"
+              onClick={() => setShowManagementModal(true)}
+              title="Manage blogs and links"
               className="p-3 rounded-full hover:bg-white/10 transition text-2xl opacity-40 hover:opacity-100"
             >
               ⭐
@@ -274,10 +290,13 @@ export default function BlogSection() {
         </DialogContent>
       </Dialog>
 
-      <AddBlogModal
-        isOpen={showAddBlogModal}
-        onClose={() => setShowAddBlogModal(false)}
-        onAddBlog={handleAddBlog}
+      <BlogManagementModal
+        isOpen={showManagementModal}
+        onClose={() => setShowManagementModal(false)}
+        blogs={blogs}
+        externalLinks={externalLinks}
+        onUpdateBlogs={handleUpdateBlogs}
+        onUpdateExternalLinks={handleUpdateExternalLinks}
       />
     </section>
   );
