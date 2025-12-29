@@ -1,4 +1,8 @@
 export default function YouTubeSection() {
+  const handleRegister = () => {
+    window.open('https://calendly.com/cal_live_1fc107e5a1c67eb226ecd2448b29f636', '_blank');
+  };
+
   return (
     <section className="py-20 bg-[#0A0E27]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,8 +38,8 @@ export default function YouTubeSection() {
             Worth <span className="line-through text-red-500">₹299</span> <span className="text-[#00FFA3] font-bold">FREE</span> for a limited time.
           </p>
           <a
-            href="https://app.trivro.in"
-            className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-black rounded-2xl text-xl hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transition transform hover:scale-105"
+            onClick={handleRegister}
+            className="inline-flex items-center px-10 py-5 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-black rounded-2xl text-xl hover:shadow-[0_0_30px_rgba(0,212,255,0.5)] transition transform hover:scale-105 cursor-pointer"
           >
             REGISTER NOW
           </a>
