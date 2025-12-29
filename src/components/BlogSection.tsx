@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, ExternalLink, X, Star } from 'lucide-react';
+import { Calendar, User, ArrowRight, ExternalLink, X } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -168,16 +168,13 @@ export default function BlogSection() {
             <p className="text-xl text-white/70">Connect with internal guides and external tools</p>
           </div>
           <div className="flex items-center space-x-4">
-            {/* Hidden Star Button - Click 3 times to open blog modal */}
+            {/* Hidden Star Button - Click to open blog modal */}
             <button
               onClick={() => setShowAddBlogModal(true)}
               title="Add new blog"
-              className="p-3 rounded-full hover:bg-white/10 transition group relative"
+              className="p-3 rounded-full hover:bg-white/10 transition text-2xl opacity-40 hover:opacity-100"
             >
-              <Star className="w-6 h-6 text-white/40 group-hover:text-[#00D4FF] transition fill-white/20 group-hover:fill-[#00D4FF]/30" />
-            </button>
-            <button className="px-6 py-3 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-bold rounded-lg hover:shadow-lg hover:shadow-[#00D4FF]/50 transition hidden md:block">
-              Add New Resource
+              ⭐
             </button>
           </div>
         </div>
