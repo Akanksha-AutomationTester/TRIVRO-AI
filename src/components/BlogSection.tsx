@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, ExternalLink, X } from 'lucide-react';
+import { Calendar, User, ArrowRight, ExternalLink, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -14,6 +14,7 @@ export default function BlogSection() {
   const [showManagementModal, setShowManagementModal] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [externalLinks, setExternalLinks] = useState<any[]>([]);
+  const [currentBlogIndex, setCurrentBlogIndex] = useState(0);
 
   const internalResources = [
     {
@@ -203,39 +204,147 @@ export default function BlogSection() {
             <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog, i) => (
-              <div key={i} className="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-[#00D4FF]/50 transition h-full flex flex-col">
-                <div className="relative h-48 overflow-hidden shrink-0">
-                  <img src={blog.image} alt={blog.title} title={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] text-sm font-semibold rounded-full">
-                    {blog.category}
-                  </div>
-                </div>
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00D4FF] transition line-clamp-2">{blog.title}</h3>
-                  <p className="text-white/70 mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
-                  <div className="flex items-center justify-between text-sm text-white/60 mb-4 mt-auto">
-                    <div className="flex items-center space-x-2">
-                      <User className="w-4 h-4" />
-                      <span>{blog.author}</span>
+          {blogs.length > 0 ? (
+            <>
+              {/* Blog Slider */}
+              <div className="mb-8">
+                <div className="relative">
+                  {/* Slider Container */}
+                  <div className="overflow-hidden">
+                    <div
+                      className="flex transition-transform duration-500 ease-in-out"
+                      style={{
+                        transform: `translateX(-${currentBlogIndex * 100}%)`,
+                      }}
+                    >
+                      {blogs.map((blog, i) => (
+                        <div key={i} className="w-full flex-shrink-0">
+                          <div className="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-[#00D4FF]/50 transition h-full flex flex-col">
+                            <div className="relative h-64 md:h-80 overflow-hidden shrink-0">
+                              <img src={blog.image} alt={blog.title} title={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                              <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] text-sm font-semibold rounded-full">
+                                {blog.category}
+                              </div>
+                            </div>
+                            <div className="p-6 flex flex-col flex-grow">
+                              <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00D4FF] transition line-clamp-2">{blog.title}</h3>
+                              <p className="text-white/70 mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
+                              <div className="flex items-center justify-between text-sm text-white/60 mb-4 mt-auto">
+                                <div className="flex items-center space-x-2">
+                                  <User className="w-4 h-4" />
+                                  <span>{blog.author}</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>{blog.date}</span>
+                                </div>
+                              </div>
+                              <button
+                                onClick={() => setSelectedBlog(blog)}
+                                className="flex items-center space-x-2 text-[#00D4FF] font-semibold group-hover:space-x-3 transition-all"
+                              >
+                                <span>Read More</span>
+                                <ArrowRight className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="w-4 h-4" />
-                      <span>{blog.date}</span>
-                    </div>
                   </div>
-                  <button
-                    onClick={() => setSelectedBlog(blog)}
-                    className="flex items-center space-x-2 text-[#00D4FF] font-semibold group-hover:space-x-3 transition-all"
-                  >
-                    <span>Read More</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+
+                  {/* Navigation Buttons */}
+                  {blogs.length > 1 && (
+                    <>
+                      <button
+                        onClick={() => setCurrentBlogIndex(Math.max(0, currentBlogIndex - 1))}
+                        disabled={currentBlogIndex === 0}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:-translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition z-10"
+                      >
+                        <ChevronLeft className="w-6 h-6" />
+                      </button>
+                      <button
+                        onClick={() => setCurrentBlogIndex(Math.min(blogs.length - 1, currentBlogIndex + 1))}
+                        disabled={currentBlogIndex === blogs.length - 1}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-12 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 disabled:opacity-50 disabled:cursor-not-allowed transition z-10"
+                      >
+                        <ChevronRight className="w-6 h-6" />
+                      </button>
+                    </>
+                  )}
                 </div>
+
+                {/* Slider Indicators */}
+                {blogs.length > 1 && (
+                  <div className="flex justify-center items-center space-x-2 mt-6">
+                    {blogs.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentBlogIndex(idx)}
+                        className={`h-2 rounded-full transition ${
+                          idx === currentBlogIndex
+                            ? 'bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] w-8'
+                            : 'bg-white/20 w-2 hover:bg-white/40'
+                        }`}
+                      />
+                    ))}
+                    <span className="text-white/60 text-sm ml-4">
+                      {currentBlogIndex + 1} / {blogs.length}
+                    </span>
+                  </div>
+                )}
               </div>
-            ))}
-          </div>
+
+              {/* Grid View for Multiple Items */}
+              {blogs.length > 1 && (
+                <>
+                  <div className="flex items-center space-x-4 mb-8 mt-16">
+                    <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
+                    <h3 className="text-lg font-bold text-white px-4 border border-[#00D4FF]/30 rounded-full py-1 bg-[#00D4FF]/10 backdrop-blur-sm">All Blogs</h3>
+                    <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {blogs.map((blog, i) => (
+                      <div key={i} className="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-[#00D4FF]/50 transition h-full flex flex-col">
+                        <div className="relative h-48 overflow-hidden shrink-0">
+                          <img src={blog.image} alt={blog.title} title={blog.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+                          <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] text-sm font-semibold rounded-full">
+                            {blog.category}
+                          </div>
+                        </div>
+                        <div className="p-6 flex flex-col flex-grow">
+                          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-[#00D4FF] transition line-clamp-2">{blog.title}</h3>
+                          <p className="text-white/70 mb-4 line-clamp-3 flex-grow">{blog.excerpt}</p>
+                          <div className="flex items-center justify-between text-sm text-white/60 mb-4 mt-auto">
+                            <div className="flex items-center space-x-2">
+                              <User className="w-4 h-4" />
+                              <span>{blog.author}</span>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <Calendar className="w-4 h-4" />
+                              <span>{blog.date}</span>
+                            </div>
+                          </div>
+                          <button
+                            onClick={() => setSelectedBlog(blog)}
+                            className="flex items-center space-x-2 text-[#00D4FF] font-semibold group-hover:space-x-3 transition-all"
+                          >
+                            <span>Read More</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <div className="text-center py-12 text-white/60">
+              No blogs available
+            </div>
+          )}
         </div>
 
         {/* External Links Section */}
