@@ -4,42 +4,42 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://trivro-ai-main.vercel.app/</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://trivro-ai-main.vercel.app/tools</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://trivro-ai-main.vercel.app/pricing</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://trivro-ai-main.vercel.app/about</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://trivro-ai-main.vercel.app/blog</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <mobile:mobile/>
   </url>
   <url>
     <loc>https://trivro-ai-main.vercel.app/best-ai-marketing-tools/</loc>
-    <lastmod>2025-12-25</lastmod>
+    <lastmod>2025-12-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <mobile:mobile/>

@@ -116,6 +116,97 @@
     }
     </script>
 
+  <!-- Structured Data - Local Business -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Trivro AI",
+      "description": "India's leading AI marketing tools ecosystem with 51+ tools for Meta Ads, landing pages, email marketing, and SEO content creation.",
+      "url": "https://trivro-ai-main.vercel.app/",
+      "telephone": "+919274741994",
+      "email": "support@trivro.in",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN",
+        "addressRegion": "MH",
+        "addressLocality": "Mumbai"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "19.0760",
+        "longitude": "72.8777"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "priceRange": "₹₹₹",
+      "paymentAccepted": ["Credit Card", "Debit Card", "Bank Transfer", "UPI"],
+      "currenciesAccepted": "INR",
+      "areaServed": "India",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "AI Marketing Tools",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "AI Marketing Tools Subscription"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
+  <!-- Structured Data - BreadcrumbList -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://trivro-ai-main.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI Marketing Tools",
+          "item": "https://trivro-ai-main.vercel.app/tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Pricing",
+          "item": "https://trivro-ai-main.vercel.app/pricing"
+        }
+      ]
+    }
+    </script>
+
+  <!-- Structured Data - Website -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Trivro AI",
+      "url": "https://trivro-ai-main.vercel.app/",
+      "description": "India's best AI marketing tools ecosystem with 51+ automated tools for Meta Ads, email marketing, landing pages & SEO.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://trivro-ai-main.vercel.app/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Trivro AI",
+        "url": "https://trivro-ai-main.vercel.app/"
+      }
+    }
+    </script>
+
   <!-- Structured Data - FAQ (for AEO) -->
   <script type="application/ld+json">
     {
@@ -150,15 +241,45 @@
     }
     </script>
 
-  <!-- Google Analytics & Tag Manager (add your ID) -->
+  <!-- Google Analytics & Tag Manager -->
   <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
-  <!-- Global site tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'YOUR_GA_ID');
+    
+    // Configure GA4
+    gtag('config', 'GA_MEASUREMENT_ID', {
+      page_title: document.title,
+      page_location: window.location.href,
+      content_group1: 'Marketing Tools',
+      send_page_view: true
+    });
+    
+    // Enhanced ecommerce tracking
+    gtag('config', 'GA_MEASUREMENT_ID', {
+      currency: 'INR',
+      custom_map: {'custom_parameter_1': 'user_type'}
+    });
+    
+    // Track custom events
+    function trackCustomEvent(eventName, parameters) {
+      gtag('event', eventName, parameters);
+    }
+    
+    // Track page views for single page app
+    if (window.history && window.history.pushState) {
+      const originalPushState = window.history.pushState;
+      window.history.pushState = function() {
+        originalPushState.apply(this, arguments);
+        trackCustomEvent('page_view', {
+          page_title: document.title,
+          page_location: window.location.href
+        });
+      };
+    }
   </script>
 </head>
 
