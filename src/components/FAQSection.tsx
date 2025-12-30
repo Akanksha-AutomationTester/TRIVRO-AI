@@ -22,6 +22,9 @@ export default function FAQSection() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">
             Frequently Asked Questions
           </h2>
+          <p className="text-white/70 max-w-2xl mx-auto">
+            Have more questions about our <a href="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI marketing tools</a>? Check out our <a href="/pricing" className="text-[#00D4FF] hover:text-[#00FFA3] transition">pricing plans</a> or <a href="/about" className="text-[#00D4FF] hover:text-[#00FFA3] transition">about us</a> page.
+          </p>
         </div>
 
         <div className="space-y-4">

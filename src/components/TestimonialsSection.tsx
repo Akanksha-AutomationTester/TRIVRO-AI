@@ -17,6 +17,9 @@ export default function TestimonialsSection() {
           <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">
             Trusted by Founders & Agencies
           </h2>
+          <p className="text-white/70 max-w-2xl mx-auto mb-8">
+            See why thousands of businesses choose our <a href="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI marketing platform</a> for their growth journey.
+          </p>
           <div className="flex justify-center space-x-6 mt-8">
             <a href="https://share.google/kNtJnol031aYnjJJE" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/10 backdrop-blur-lg rounded-lg border border-white/20 hover:bg-white/20 transition text-white font-semibold">
               Google Reviews

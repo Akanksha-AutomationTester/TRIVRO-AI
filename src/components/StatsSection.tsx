@@ -15,6 +15,9 @@ export default function StatsSection() {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">
             Trivro AI Impact in Numbers
           </h2>
+          <p className="text-white/70 max-w-2xl mx-auto">
+            Join thousands of founders and agencies using our <a href="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI marketing tools</a> to scale their business faster and more efficiently.
+          </p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
           {stats.map((stat, i) => (
