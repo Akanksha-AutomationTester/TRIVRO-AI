@@ -11,10 +11,10 @@ export default function HeroSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white">
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white speakable-text">
             <span className="bg-gradient-to-r from-[#00D4FF] via-[#8B5CF6] to-[#00FFA3] bg-clip-text text-transparent">India's Best AI Marketing Tools Ecosystem</span>
           </h1>
-          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-4xl mx-auto">
+          <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-4xl mx-auto speakable-text">
             Build Meta Ads, Funnels, Landing Pages, Emails, Blogs & SEO Content — in Minutes. Powered by 51+ AI Tools.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
