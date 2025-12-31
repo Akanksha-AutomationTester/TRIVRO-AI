@@ -9,7 +9,9 @@ import FounderSection from './FounderSection';
 import FAQSection from './FAQSection';
 import DemoCallSection from './DemoCallSection';
 import AEOOptimization from './AEOOptimization';
+import ToolsOverview from './ToolsOverview';
 import Footer from './Footer';
+import BlogSection from './BlogSection';
 import WhatsAppWidget from './WhatsAppWidget';
 import CookieConsent from './CookieConsent';
 
@@ -25,9 +27,11 @@ export default function AppLayout() {
       <FounderSection />
       <TestimonialsSection />
       <FAQSection />
+      <BlogSection />
       <DemoCallSection />
       {/* Hidden SEO optimization component */}
       <AEOOptimization />
+      <ToolsOverview />
       <Footer />
       <WhatsAppWidget />
       <CookieConsent />
