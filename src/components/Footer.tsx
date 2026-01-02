@@ -60,15 +60,17 @@ export default function Footer() {
               </ul>
             </div>
 
-          <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Learn More</h4>
-            <ul className="space-y-4 text-white/50">
-              <li><a href="https://developers.facebook.com/docs/marketing-apis/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Meta Marketing API Docs</a></li>
-              <li><a href="https://blog.hubspot.com/marketing" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">HubSpot Marketing Blog</a></li>
-              <li><a href="https://neilpatel.com/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Neil Patel SEO Insights</a></li>
-              <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Moz SEO Guide</a></li>
-            </ul>
-          </div>
+<div>
+              <h4 className="text-white font-bold mb-6 text-lg">Learn More</h4>
+              <ul className="space-y-4 text-white/50">
+                <li><a href="https://developers.facebook.com/docs/marketing-apis/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Meta Marketing API Docs</a></li>
+                <li><a href="https://blog.hubspot.com/marketing" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">HubSpot Marketing Blog</a></li>
+                <li><a href="https://neilpatel.com/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Neil Patel SEO Insights</a></li>
+                <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Moz SEO Guide</a></li>
+                <li><a href="https://www.searchenginejournal.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Search Engine Journal</a></li>
+                <li><a href="https://contentmarketinginstitute.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Content Marketing Institute</a></li>
+              </ul>
+            </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 text-center text-white/40 text-sm">

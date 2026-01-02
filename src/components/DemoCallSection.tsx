@@ -1,4 +1,5 @@
 import { Calendar, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function DemoCallSection() {
   return (
@@ -11,7 +12,7 @@ export default function DemoCallSection() {
           See Trivro AI in Action
         </h2>
         <p className="text-xl text-white/80 mb-8">
-          Book a personalized demo call and discover how Trivro AI can transform your marketing
+          Book a personalized demo call and discover how our <Link to="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI marketing tools</Link> can transform your business. Not sure yet? Read our <Link to="/blog" className="text-[#00D4FF] hover:text-[#00FFA3] transition">blog</Link> or check <Link to="/pricing" className="text-[#00D4FF] hover:text-[#00FFA3] transition">pricing</Link>.
         </p>
         
         <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10 max-w-2xl mx-auto">
