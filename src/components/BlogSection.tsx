@@ -283,11 +283,11 @@ export default function BlogSection() {
           </div>
         </div>
 
-        {/* 1. INTERNAL LINKS SECTION */}
+        {/* 1. BLOG SECTION */}
         <div className="mb-24">
           <div className="flex items-center space-x-4 mb-8">
             <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
-            <h3 className="text-2xl font-bold text-white px-4 border border-[#00D4FF]/30 rounded-full py-1 bg-[#00D4FF]/10 backdrop-blur-sm">Internal Links</h3>
+            <h3 className="text-2xl font-bold text-white px-4 border border-[#00D4FF]/30 rounded-full py-1 bg-[#00D4FF]/10 backdrop-blur-sm">Blog</h3>
             <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
           </div>
 
