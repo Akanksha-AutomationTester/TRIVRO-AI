@@ -266,22 +266,19 @@ export default function LatestUpdatesSlider({ updates: externalUpdates }: { upda
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E27] via-[#0A0E27]/40 to-transparent" />
                                     <div className="absolute inset-0 bg-gradient-to-br from-[#00D4FF]/10 via-transparent to-[#00FFA3]/10" />
-                                    {/* Enhanced Glass Overlay */}
-                                    <div className="absolute bottom-8 left-8 right-8 p-6 backdrop-blur-2xl bg-gradient-to-br from-white/10 to-white/5 border-2 border-white/20 rounded-2xl shadow-2xl shadow-[#00D4FF]/20">
-                                        <div className="flex items-center gap-3 text-[#00D4FF] mb-3">
-                                            <Sparkles className="w-5 h-5" />
-                                            <span className="text-xs font-black uppercase tracking-widest bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">{selectedDetail.date}</span>
-                                        </div>
-                                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tighter leading-[1.1] drop-shadow-lg">
-                                            {selectedDetail.title}
-                                        </h2>
-                                    </div>
-                                </div>
-                            )}
-                            <div className="p-8 sm:p-12">
-                                <div className="text-xl text-white/80 leading-relaxed whitespace-pre-wrap space-y-6 max-w-3xl">
-                                    {selectedDetail.detailedContent || selectedDetail.content}
-                                </div>
+                                  </div>
+                              )}
+                              <div className="p-8 sm:p-12">
+                                  <div className="flex items-center gap-3 text-[#00D4FF] mb-3">
+                                      <Sparkles className="w-5 h-5" />
+                                      <span className="text-xs font-black uppercase tracking-widest bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">{selectedDetail.date}</span>
+                                  </div>
+                                  <DialogTitle className="text-2xl sm:text-4xl font-black text-white tracking-tighter leading-[1.1] drop-shadow-lg mb-6">
+                                      {selectedDetail.title}
+                                  </DialogTitle>
+                                  <div className="text-xl text-white/80 leading-relaxed whitespace-pre-wrap space-y-6 max-w-3xl">
+                                      {selectedDetail.detailedContent || selectedDetail.content}
+                                  </div>
                                 {selectedDetail.link && (
                                     <div className="mt-12">
                                         <a
