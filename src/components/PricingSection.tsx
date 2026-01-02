@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function PricingSection() {
   const plans = [
     {
@@ -49,6 +51,9 @@ export default function PricingSection() {
             <span className="bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">Affordable Pricing for Every Business</span>
           </h2>
           <p className="text-xl text-white/70">Simple, Flexible, Built for Your Growth</p>
+          <p className="text-white/50 mt-4">
+            Explore all our <Link to="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">51+ AI tools</Link> or learn more <Link to="/about" className="text-[#00D4FF] hover:text-[#00FFA3] transition">about us</Link>
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

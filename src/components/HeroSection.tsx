@@ -55,17 +55,17 @@ export default function HeroSection() {
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
-          {[
-            { img: metaAdsBg, title: 'Meta Ads AI' },
-            { img: funnelGenieAiBg, title: 'Funnel Genie AI' },
-            { img: aiEmailMarketingBg, title: 'Email Marketing AI' }
-          ].map((tool, i) => (
-            <div key={i} className="group relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-[#00D4FF]/50 transition transform hover:scale-105 hover:shadow-2xl hover:shadow-[#00D4FF]/30">
-              <img src={tool.img} alt={tool.title} title={tool.title} className="w-full h-48 object-cover rounded-lg mb-4" />
-              <h3 className="text-xl font-bold text-white">{tool.title}</h3>
-            </div>
-          ))}
-        </div>
+            {[
+              { img: metaAdsBg, title: 'Meta Ads AI', link: '/tools' },
+              { img: funnelGenieAiBg, title: 'Funnel Genie AI', link: '/tools' },
+              { img: aiEmailMarketingBg, title: 'Email Marketing AI', link: '/tools' }
+            ].map((tool, i) => (
+              <Link to={tool.link} key={i} className="group relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 hover:border-[#00D4FF]/50 transition transform hover:scale-105 hover:shadow-2xl hover:shadow-[#00D4FF]/30">
+                <img src={tool.img} alt={tool.title} title={tool.title} className="w-full h-48 object-cover rounded-lg mb-4" />
+                <h3 className="text-xl font-bold text-white">{tool.title}</h3>
+              </Link>
+            ))}
+          </div>
       </div>
     </section>
   );

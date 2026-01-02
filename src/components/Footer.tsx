@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#0A0E27] border-t border-white/10 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-12">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center space-x-3 mb-6 inline-flex">
               <img src="https://d64gsuwffb70l.cloudfront.net/6929245d5cbaf46091e25752_1764304011186_9d921df5.png" alt="Trivro AI Logo" title="Trivro AI Logo" className="h-12 w-12" loading="lazy" />
@@ -51,12 +51,22 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 text-lg">Resources</h4>
+              <h4 className="text-white font-bold mb-6 text-lg">Resources</h4>
+              <ul className="space-y-4 text-white/50">
+                <li><Link to="/blog" className="hover:text-[#00D4FF] transition">Blog & Guides</Link></li>
+                <li><a href="https://app.trivro.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Login</a></li>
+                <li><a href="mailto:support@trivro.in" className="hover:text-[#00D4FF] transition flex items-center gap-2"><Mail className="w-4 h-4" /> Email Support</a></li>
+                <li><a href="https://www.youtube.com/watch?v=BngPWSxzF-w" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Video Tutorial</a></li>
+              </ul>
+            </div>
+
+          <div>
+            <h4 className="text-white font-bold mb-6 text-lg">Learn More</h4>
             <ul className="space-y-4 text-white/50">
-              <li><Link to="/blog" className="hover:text-[#00D4FF] transition">Blog & Guides</Link></li>
-              <li><a href="https://app.trivro.in" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Login</a></li>
-              <li><a href="mailto:support@trivro.in" className="hover:text-[#00D4FF] transition flex items-center gap-2"><Mail className="w-4 h-4" /> Email Support</a></li>
-              <li><a href="https://www.youtube.com/watch?v=BngPWSxzF-w" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Video Tutorial</a></li>
+              <li><a href="https://developers.facebook.com/docs/marketing-apis/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Meta Marketing API Docs</a></li>
+              <li><a href="https://blog.hubspot.com/marketing" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">HubSpot Marketing Blog</a></li>
+              <li><a href="https://neilpatel.com/blog/" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Neil Patel SEO Insights</a></li>
+              <li><a href="https://moz.com/beginners-guide-to-seo" target="_blank" rel="noopener noreferrer" className="hover:text-[#00D4FF] transition">Moz SEO Guide</a></li>
             </ul>
           </div>
         </div>

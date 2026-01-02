@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { toolCategories } from '@/data/toolsData';
 import { useState, useEffect } from 'react';
 import {
@@ -336,7 +337,7 @@ export default function ToolsShowcase() {
           <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             <span className="bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">Key Features & Tools</span>
           </h2>
-          <p className="text-xl text-white/70 mb-10">Everything you need to scale your marketing</p>
+          <p className="text-xl text-white/70 mb-10">Everything you need to scale your marketing. Learn more about <a href="https://blog.hubspot.com/marketing/ai-marketing" target="_blank" rel="noopener noreferrer" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI in marketing</a></p>
 
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
             <div className="relative w-full md:w-96 group">
