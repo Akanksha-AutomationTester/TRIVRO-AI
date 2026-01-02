@@ -39,10 +39,10 @@ export default function HeroSection() {
           <div className="flex justify-center py-10">
             <button
               onClick={() => setShowUpdates(!showUpdates)}
-              className="group relative px-8 py-4 bg-gradient-to-r from-[#8B5CF6] via-[#00D4FF] to-[#00FFA3] text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-[#00D4FF]/40 transition-all duration-300 transform hover:scale-105 animate-pulse hover:animate-none"
+              className="group relative px-8 py-4 bg-white/10 backdrop-blur-lg text-white font-bold rounded-lg border border-white/20 hover:bg-white/20 hover:border-[#00D4FF]/50 transition-all duration-300 transform hover:scale-105"
             >
               <span className="flex items-center gap-2">
-                <span className="w-2 h-2 bg-[#00FFA3] rounded-full animate-ping"></span>
+                <span className="w-2 h-2 bg-[#00D4FF] rounded-full animate-pulse"></span>
                 {showUpdates ? 'Hide Updates' : "What's New - View Latest Updates"}
               </span>
             </button>
