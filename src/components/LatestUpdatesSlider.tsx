@@ -279,26 +279,9 @@ export default function LatestUpdatesSlider({ updates: externalUpdates }: { upda
                                   <div className="text-xl text-white/80 leading-relaxed whitespace-pre-wrap space-y-6 max-w-3xl">
                                       {selectedDetail.detailedContent || selectedDetail.content}
                                   </div>
-                                {selectedDetail.link && (
-                                    <div className="mt-12">
-                                        <a
-                                            href={selectedDetail.link}
-                                            className="inline-flex items-center space-x-4 px-10 py-5 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-black uppercase tracking-widest text-xs rounded-2xl hover:shadow-[0_0_60px_rgba(0,212,255,0.6)] transition-all transform hover:-translate-y-1 hover:scale-105"
-                                        >
-                                            <span>Launch Feature</span>
-                                            <ArrowRight className="w-5 h-5" />
-                                        </a>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    )}
-                    <button
-                        onClick={() => setSelectedDetail(null)}
-                        className="absolute top-6 right-6 p-3 rounded-full bg-black/60 backdrop-blur-md text-white hover:bg-black/80 transition z-50 border-2 border-white/20 hover:border-[#00D4FF]/50 hover:shadow-lg hover:shadow-[#00D4FF]/30"
-                    >
-                        <X className="w-5 h-5" />
-                    </button>
+                              </div>
+                          </div>
+                      )}
                 </DialogContent>
             </Dialog>
         </section>
