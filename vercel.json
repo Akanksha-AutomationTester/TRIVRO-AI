@@ -5,6 +5,17 @@
       "has": [
         {
           "type": "host",
+          "value": "www.trivro-ai-six.vercel.app"
+        }
+      ],
+      "destination": "https://trivro-ai-six.vercel.app/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
           "value": "www.trivro-ai-main.vercel.app"
         }
       ],
@@ -49,7 +60,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(png|jpg|jpeg|svg|webp|gif|ico)$",
+      "source": "/(.*)\\.(?:png|jpg|jpeg|svg|webp|gif|ico)$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -62,20 +73,15 @@
       ]
     },
     {
-      "source": "/(.*)\\.(css|js|woff|woff2|ttf|otf|eot)$",
+      "source": "/(.*)\\.(?:css|js|woff|woff2|ttf|otf|eot)$",
       "headers": [
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "\\.(html|htm)$",
-      "headers": [
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=604800"
+          "key": "Expires",
+          "value": "Thu, 31 Dec 2026 23:59:59 GMT"
         }
       ]
     }

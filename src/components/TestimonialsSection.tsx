@@ -12,22 +12,6 @@ export default function TestimonialsSection() {
 
   return (
     <section className="py-20 bg-gradient-to-br from-[#0A0E27] to-[#1a1f3a]">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {testimonials.map((t, i) => (
-          <div key={i} className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-[#00D4FF]/50 transition">
-            <div className="flex mb-4">
-              {[...Array(t.rating)].map((_, j) => (
-                <Star key={j} className="w-5 h-5 fill-[#00FFA3] text-[#00FFA3]" />
-              ))}
-            </div>
-            <p className="text-white/80 mb-4 italic">"{t.text}"</p>
-            <div>
-              <p className="text-white font-semibold">{t.name}</p>
-              <p className="text-white/60 text-sm">{t.role}</p>
-            </div>
-          </div>
-        ))}
-      </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">
@@ -36,17 +20,32 @@ export default function TestimonialsSection() {
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
             See why thousands of businesses choose our <a href="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">AI marketing platform</a> for their growth journey.
           </p>
-          <div className="flex justify-center space-x-6 mt-8">
-            <a href="https://share.google/kNtJnol031aYnjJJE" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/10 backdrop-blur-lg rounded-lg border border-white/20 hover:bg-white/20 transition text-white font-semibold">
+          <div className="flex flex-wrap justify-center gap-4 mt-8">
+            <a href="https://share.google/kNtJnol031aYnjJJE" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/10 backdrop-blur-lg rounded-lg border border-white/20 hover:bg-white/20 hover:border-[#00D4FF]/50 transition text-white font-semibold">
               Google Reviews
             </a>
-            <a href="https://www.trustpilot.com/review/trivro.in" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/10 backdrop-blur-lg rounded-lg border border-white/20 hover:bg-white/20 transition text-white font-semibold">
+            <a href="https://www.trustpilot.com/review/trivro.in" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-white/10 backdrop-blur-lg rounded-lg border border-white/20 hover:bg-white/20 hover:border-[#00D4FF]/50 transition text-white font-semibold">
               Trustpilot Reviews
             </a>
           </div>
         </div>
 
-
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((t, i) => (
+            <div key={i} className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-[#00D4FF]/50 transition">
+              <div className="flex mb-4">
+                {[...Array(t.rating)].map((_, j) => (
+                  <Star key={j} className="w-5 h-5 fill-[#00FFA3] text-[#00FFA3]" />
+                ))}
+              </div>
+              <p className="text-white/80 mb-4 italic">"{t.text}"</p>
+              <div>
+                <p className="text-white font-semibold">{t.name}</p>
+                <p className="text-white/60 text-sm">{t.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
