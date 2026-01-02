@@ -1,12 +1,12 @@
 import { toolCategories } from '@/data/toolsData';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, Sparkles, CheckCircle2, Search, Filter } from 'lucide-react';
+import { ArrowRight, Sparkles, CheckCircle2, Search, Filter, X } from 'lucide-react';
 import { marketingTools, contentTools, businessTools } from '@/data/toolsDataPart2';
 import trivroCloudBg from '@/assets/trivro-cloud-bg.jpg';
 import crmExpressBg from '@/assets/crm-express-bg.jpg';
@@ -51,7 +51,7 @@ import aiDomainBg from '@/assets/ai-domain-bg.png';
 import brainmailBg from '@/assets/brainmail-bg.png';
 import notesBg from '@/assets/notes-bg.jpg';
 
-const moreDetailedInfo: { [key: string]: { features: string[], useCase: string } } = {
+const hardcodedDetailedInfo: { [key: string]: { features: string[], useCase: string } } = {
   'Meta Ads AI': {
     features: ['Instant Ad Copy Generation', 'Visual Creative Suggestions', 'Split Testing Hooks', 'Direct Meta Integration'],
     useCase: 'Best for agency owners and e-commerce brands looking to scale their Facebook & Instagram ad spend efficiently.'
@@ -226,19 +226,63 @@ export default function ToolsShowcase() {
   const [selectedTool, setSelectedTool] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
+  const [tools, setTools] = useState<any[]>([]);
 
-  const allCategories = [marketingTools, ...toolCategories, contentTools, businessTools];
+  useEffect(() => {
+    // Default tools from source files
+    const defaultTools = [
+      ...marketingTools.tools.map(t => ({ ...t, category: marketingTools.title })),
+      ...contentTools.tools.map(t => ({ ...t, category: contentTools.title })),
+      ...businessTools.tools.map(t => ({ ...t, category: businessTools.title })),
+      ...(toolCategories[0]?.tools.map(t => ({ ...t, category: toolCategories[0].title })) || []),
+      ...(toolCategories[1]?.tools.map(t => ({ ...t, category: toolCategories[1].title })) || [])
+    ];
 
-  const categories = ['All', ...allCategories.map(cat => cat.title)];
+    const savedTools = localStorage.getItem('trivro_tools');
+    if (savedTools) {
+      try {
+        const parsed = JSON.parse(savedTools);
+        if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+          // Merge custom tools with default tools, ensuring unique names
+          const toolMap = new Map();
+          defaultTools.forEach(t => toolMap.set(t.name, t));
+          parsed.forEach(t => toolMap.set(t.name, t));
+          setTools(Array.from(toolMap.values()));
+          return;
+        }
+      } catch (e) {
+        console.error('Error parsing tools from localstorage', e);
+      }
+    }
 
-  const filteredCategories = allCategories.map(category => ({
-    ...category,
-    tools: category.tools.filter(tool =>
-      (activeCategory === 'All' || category.title === activeCategory) &&
-      (tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        tool.desc.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
-  })).filter(category => category.tools.length > 0);
+    setTools(defaultTools);
+  }, []);
+
+  const categories = [
+    'All',
+    'AI Marketing & Funnel Builder',
+    'Content Creation Tools',
+    'Business & Productivity Tools',
+    'AI Advertising Tools',
+    'Branding & Creative Suite'
+  ];
+
+  const filteredTools = tools.filter(tool =>
+    (activeCategory === 'All' || tool.category === activeCategory) &&
+    (tool.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tool.desc.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
+  // Group filtered tools by category for display
+  const groupedTools = categories.filter(cat => cat !== 'All').map(cat => ({
+    title: cat,
+    color: cat === 'AI Marketing & Funnel Builder' ? 'from-green-500 to-emerald-500' :
+      cat === 'Content Creation Tools' ? 'from-orange-500 to-amber-500' :
+        cat === 'Business & Productivity Tools' ? 'from-purple-500 to-indigo-500' :
+          cat === 'AI Advertising Tools' ? 'from-blue-500 to-cyan-500' :
+            'from-pink-500 to-rose-500',
+    tools: filteredTools.filter(t => t.category === cat)
+  })).filter(cat => cat.tools.length > 0);
 
   const backgroundImages: { [key: string]: string } = {
     'Trivro Cloud (5TB)': trivroCloudBg,
@@ -323,14 +367,14 @@ export default function ToolsShowcase() {
           </div>
         </div>
 
-        {filteredCategories.length === 0 ? (
+        {groupedTools.length === 0 ? (
           <div className="text-center py-20 bg-white/5 rounded-3xl border border-dashed border-white/20">
             <div className="text-6xl mb-4">🔍</div>
             <h3 className="text-2xl font-bold text-white mb-2">No tools found</h3>
             <p className="text-white/60">Try searching with a different keyword or category.</p>
           </div>
         ) : (
-          filteredCategories.map((category, idx) => (
+          groupedTools.map((category, idx) => (
             <div key={idx} className="mb-16">
               <h3 className={`text-3xl font-bold mb-8 bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
                 {category.title}
@@ -346,22 +390,18 @@ export default function ToolsShowcase() {
                         <img
                           src={backgroundImages[tool.name]}
                           alt={`${tool.name} tool interface preview`}
-                          title={`${tool.name} - AI Marketing Tool Preview`}
-                          loading="lazy"
                           className="absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60"
-                          decoding="async"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0" />
                       </>
                     )}
                     <div className="relative z-10 h-full flex flex-col">
-                      <div className="text-4xl mb-4" role="img" aria-label={tool.name}>{tool.icon}</div>
+                      <div className="text-4xl mb-4" role="img">{tool.icon}</div>
                       <h4 className="text-xl font-bold text-white mb-2">{tool.name}</h4>
                       <p className="text-white/70 mb-4 flex-grow">{tool.desc}</p>
                       <button
                         onClick={() => setSelectedTool(tool)}
                         className="flex items-center space-x-2 text-[#00D4FF] font-semibold hover:text-[#00FFA3] transition mt-auto group/btn"
-                        aria-label={`Read more about ${tool.name}`}
                       >
                         <span>Read More</span>
                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition" />
@@ -401,7 +441,7 @@ export default function ToolsShowcase() {
                   {selectedTool.desc}
                 </p>
 
-                {moreDetailedInfo[selectedTool.name] && (
+                {(hardcodedDetailedInfo[selectedTool.name] || (selectedTool.features && selectedTool.features.length > 0)) && (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
                       <h5 className="text-xl font-bold text-white mb-6 flex items-center">
@@ -409,7 +449,7 @@ export default function ToolsShowcase() {
                         Key Features
                       </h5>
                       <div className="space-y-4">
-                        {moreDetailedInfo[selectedTool.name].features.map((feature, i) => (
+                        {(selectedTool.features && selectedTool.features.length > 0 ? selectedTool.features : hardcodedDetailedInfo[selectedTool.name]?.features || []).map((feature: string, i: number) => (
                           <div key={i} className="flex items-center space-x-4 text-white/80 text-lg">
                             <div className="w-1.5 h-1.5 rounded-full bg-[#00FFA3] shrink-0" />
                             <span>{feature}</span>
@@ -424,7 +464,7 @@ export default function ToolsShowcase() {
                         Use Case
                       </h5>
                       <p className="text-white/70 italic text-xl leading-relaxed">
-                        {moreDetailedInfo[selectedTool.name].useCase}
+                        {selectedTool.useCase || hardcodedDetailedInfo[selectedTool.name]?.useCase}
                       </p>
                     </div>
                   </div>
@@ -432,6 +472,12 @@ export default function ToolsShowcase() {
               </div>
             </div>
           )}
+          <button
+            onClick={() => setSelectedTool(null)}
+            className="absolute top-6 right-6 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition"
+          >
+            <X className="w-6 h-6" />
+          </button>
         </DialogContent>
       </Dialog>
     </section >

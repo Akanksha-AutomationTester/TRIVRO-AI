@@ -4,9 +4,10 @@ import PageLayout from '@/components/PageLayout';
 export default function BlogPage() {
     return (
         <PageLayout>
-            <div className="pt-20">
+
+            <main className="min-h-screen bg-[#0A0E27]">
                 <BlogSection />
-            </div>
+            </main>
         </PageLayout>
     );
 }

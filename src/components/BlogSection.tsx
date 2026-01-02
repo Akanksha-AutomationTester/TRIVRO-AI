@@ -1,20 +1,77 @@
 import { useState, useEffect } from 'react';
-import { Calendar, User, ArrowRight, ExternalLink, X } from 'lucide-react';
+import { Calendar, User, ArrowRight, ExternalLink, X, Bell } from 'lucide-react';
+import LatestUpdatesSlider from './LatestUpdatesSlider';
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from "@/components/ui/dialog";
 import BlogManagementModal from '@/components/BlogManagementModal';
+import { toolCategories } from '@/data/toolsData';
+import { marketingTools, contentTools, businessTools } from '@/data/toolsDataPart2';
 
 export default function BlogSection() {
   const [selectedBlog, setSelectedBlog] = useState<any>(null);
   const [showManagementModal, setShowManagementModal] = useState(false);
   const [blogs, setBlogs] = useState<any[]>([]);
   const [externalLinks, setExternalLinks] = useState<any[]>([]);
+  const [latestUpdates, setLatestUpdates] = useState<any[]>([]);
+  const [tools, setTools] = useState<any[]>([]);
   const [showAllBlogs, setShowAllBlogs] = useState(false);
+
+  const defaultUpdates = [
+    {
+      id: 'update-1',
+      title: 'AI Website Builder 🚀',
+      content: 'Build SEO-optimized sites in 60 seconds. No code.',
+      detailedContent: 'Our new AI Website Builder uses advanced generative AI to create complete websites from a single prompt. Features include:\n\n- One-click SEO optimization\n- Mobile-responsive designs\n- Integrated copy generation\n- Custom domain support\n\nScale your online presence faster than ever before.',
+      date: 'Dec 28, 2024',
+      link: '/tools',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
+      gridSize: 'large',
+      badgeText: 'Live Now',
+      badgeType: 'live'
+    },
+    {
+      id: 'update-2',
+      title: 'WhatsApp Automation 📱',
+      content: 'Automated engagement for your customers.',
+      detailedContent: 'WhatsApp is where your customers are. Our automation suite allows you to:\n\n- Set up 24/7 AI-powered customer support\n- Send bulk updates safely\n- Automate appointment reminders\n- Track engagement and lead conversion.',
+      date: 'Dec 25, 2024',
+      link: '/tools',
+      image: 'https://images.unsplash.com/photo-1611746872915-64382b5c76da?auto=format&fit=crop&q=80&w=1000',
+      gridSize: 'wide',
+      badgeText: 'New Feature',
+      badgeType: 'new'
+    },
+    {
+      id: 'update-3',
+      title: 'Trivro v2.0 ⚡',
+      content: '10x speed with advanced AEO tools.',
+      detailedContent: 'We have completely rebuilt the Trivro engine for 10x speed. \n\nWhat is next?\n- Advanced AEO features\n- Global language expansion\n- More niche-specific AI tools\n\nThank you for believing in us!',
+      date: 'Dec 20, 2024',
+      link: '',
+      image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200',
+      gridSize: 'standard',
+      badgeText: 'v2.0',
+      badgeType: 'version'
+    }, {
+      id: 'update-4',
+      title: '50K Users 🎉',
+      content: 'Celebrating a growth milestone!',
+      date: 'Dec 15, 2024',
+      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200',
+      gridSize: 'standard'
+    }
+  ];
+
+  const defaultTools = [
+    ...marketingTools.tools.map(t => ({ ...t, category: marketingTools.title, id: `tool-${t.name}` })),
+    ...contentTools.tools.map(t => ({ ...t, category: contentTools.title, id: `tool-${t.name}` })),
+    ...businessTools.tools.map(t => ({ ...t, category: businessTools.title, id: `tool-${t.name}` })),
+    ...(toolCategories[0]?.tools.map(t => ({ ...t, category: toolCategories[0].title, id: `tool-${t.name}` })) || []),
+    ...(toolCategories[1]?.tools.map(t => ({ ...t, category: toolCategories[1].title, id: `tool-${t.name}` })) || [])
+  ];
 
   const internalResources = [
     {
@@ -103,56 +160,6 @@ export default function BlogSection() {
     }
   ];
 
-  // Load blogs and external links from localStorage on component mount
-  useEffect(() => {
-    const savedBlogs = localStorage.getItem('trivro_blogs');
-    const savedLinks = localStorage.getItem('trivro_external_links');
-    
-    if (savedBlogs) {
-      try {
-        const parsedBlogs = JSON.parse(savedBlogs);
-        const allBlogs = parsedBlogs.map((b: any) => ({ ...b, id: b.id || Date.now().toString() }));
-        setBlogs([...internalResources, ...allBlogs]);
-      } catch (error) {
-        console.error('Error loading blogs from localStorage:', error);
-        setBlogs(internalResources.map((b: any) => ({ ...b, id: b.id || Date.now().toString() })));
-      }
-    } else {
-      setBlogs(internalResources.map((b: any) => ({ ...b, id: b.id || Date.now().toString() })));
-    }
-
-    if (savedLinks) {
-      try {
-        const parsedLinks = JSON.parse(savedLinks);
-        const allLinks = parsedLinks.map((l: any) => ({ ...l, id: l.id || Date.now().toString() }));
-        setExternalLinks([...externalResources, ...allLinks]);
-      } catch (error) {
-        console.error('Error loading external links from localStorage:', error);
-        setExternalLinks(externalResources.map((l: any) => ({ ...l, id: l.id || Date.now().toString() })));
-      }
-    } else {
-      setExternalLinks(externalResources.map((l: any) => ({ ...l, id: l.id || Date.now().toString() })));
-    }
-  }, []);
-
-  const handleUpdateBlogs = (updatedBlogs: any[]) => {
-    // Filter out the default blogs and save only custom ones
-    const customBlogs = updatedBlogs.filter(
-      b => !internalResources.find(ir => ir.title === b.title)
-    );
-    localStorage.setItem('trivro_blogs', JSON.stringify(customBlogs));
-    setBlogs(updatedBlogs);
-  };
-
-  const handleUpdateExternalLinks = (updatedLinks: any[]) => {
-    // Filter out the default links and save only custom ones
-    const customLinks = updatedLinks.filter(
-      l => !externalResources.find(er => er.title === l.title)
-    );
-    localStorage.setItem('trivro_external_links', JSON.stringify(customLinks));
-    setExternalLinks(updatedLinks);
-  };
-
   const externalResources = [
     {
       title: 'OpenAI ChatGPT',
@@ -174,9 +181,90 @@ export default function BlogSection() {
     }
   ];
 
+  useEffect(() => {
+    const savedBlogs = localStorage.getItem('trivro_blogs');
+    const savedLinks = localStorage.getItem('trivro_external_links');
+    const savedUpdates = localStorage.getItem('trivro_latest_updates');
+    const savedTools = localStorage.getItem('trivro_tools');
+
+    if (savedBlogs) {
+      try {
+        const parsedBlogs = JSON.parse(savedBlogs);
+        const allBlogs = parsedBlogs.map((b: any) => ({ ...b, id: b.id || Date.now().toString() }));
+        setBlogs([...internalResources, ...allBlogs]);
+      } catch (error) {
+        setBlogs(internalResources.map((b: any) => ({ ...b, id: Math.random().toString() })));
+      }
+    } else {
+      setBlogs(internalResources.map((b: any) => ({ ...b, id: Math.random().toString() })));
+    }
+
+    if (savedLinks) {
+      try {
+        const parsedLinks = JSON.parse(savedLinks);
+        const allLinks = parsedLinks.map((l: any) => ({ ...l, id: l.id || Date.now().toString() }));
+        setExternalLinks([...externalResources, ...allLinks]);
+      } catch (error) {
+        setExternalLinks(externalResources.map((l: any) => ({ ...l, id: Math.random().toString() })));
+      }
+    } else {
+      setExternalLinks(externalResources.map((l: any) => ({ ...l, id: Math.random().toString() })));
+    }
+
+    if (savedUpdates) {
+      try {
+        const parsedUpdates = JSON.parse(savedUpdates);
+        setLatestUpdates(parsedUpdates.length > 0 ? parsedUpdates : defaultUpdates);
+      } catch (error) {
+        setLatestUpdates(defaultUpdates);
+      }
+    } else {
+      setLatestUpdates(defaultUpdates);
+    }
+
+    if (savedTools) {
+      try {
+        const parsedTools = JSON.parse(savedTools);
+        setTools(parsedTools.length > 0 ? parsedTools : defaultTools);
+      } catch (error) {
+        setTools(defaultTools);
+      }
+    } else {
+      setTools(defaultTools);
+    }
+  }, []);
+
+  const handleUpdateBlogs = (updatedBlogs: any[]) => {
+    const customBlogs = updatedBlogs.filter(
+      b => !internalResources.find(ir => ir.title === b.title)
+    );
+    localStorage.setItem('trivro_blogs', JSON.stringify(customBlogs));
+    setBlogs(updatedBlogs);
+  };
+
+  const handleUpdateExternalLinks = (updatedLinks: any[]) => {
+    const customLinks = updatedLinks.filter(
+      l => !externalResources.find(er => er.title === l.title)
+    );
+    localStorage.setItem('trivro_external_links', JSON.stringify(customLinks));
+    setExternalLinks(updatedLinks);
+  };
+
+  const handleUpdateLatestUpdates = (updatedUpdates: any[]) => {
+    localStorage.setItem('trivro_latest_updates', JSON.stringify(updatedUpdates));
+    setLatestUpdates(updatedUpdates);
+  };
+
+  const handleUpdateTools = (updatedTools: any[]) => {
+    localStorage.setItem('trivro_tools', JSON.stringify(updatedTools));
+    setTools(updatedTools);
+  };
+
   return (
     <section id="blog" className="py-20 bg-[#0A0E27]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* HEADER SECTION */}
         <div className="flex justify-between items-center mb-12">
           <div>
             <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] bg-clip-text text-transparent">
@@ -185,10 +273,9 @@ export default function BlogSection() {
             <p className="text-xl text-white/70">Connect with internal guides and external tools</p>
           </div>
           <div className="flex items-center space-x-4">
-            {/* Hidden Star Button - Opens Blog Management */}
             <button
               onClick={() => setShowManagementModal(true)}
-              title="Manage blogs and links"
+              title="Manage blogs, links, updates, and tools"
               className="p-3 rounded-full hover:bg-white/10 transition text-2xl opacity-40 hover:opacity-100"
             >
               ⭐
@@ -196,8 +283,8 @@ export default function BlogSection() {
           </div>
         </div>
 
-        {/* Internal Links Section */}
-        <div className="mb-16">
+        {/* 1. INTERNAL LINKS SECTION */}
+        <div className="mb-24">
           <div className="flex items-center space-x-4 mb-8">
             <div className="h-px bg-gradient-to-r from-transparent via-[#00D4FF] to-transparent flex-grow opacity-50"></div>
             <h3 className="text-2xl font-bold text-white px-4 border border-[#00D4FF]/30 rounded-full py-1 bg-[#00D4FF]/10 backdrop-blur-sm">Internal Links</h3>
@@ -206,7 +293,6 @@ export default function BlogSection() {
 
           {blogs.length > 0 ? (
             <>
-              {/* Blogs Grid - Show 3 by default, all when expanded */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
                 {blogs.slice(0, showAllBlogs ? blogs.length : 3).map((blog, i) => (
                   <div key={i} className="group bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-[#00D4FF]/50 transition h-full flex flex-col">
@@ -241,7 +327,6 @@ export default function BlogSection() {
                 ))}
               </div>
 
-              {/* View More Button */}
               {blogs.length > 3 && (
                 <div className="flex justify-center">
                   <button
@@ -260,16 +345,21 @@ export default function BlogSection() {
           )}
         </div>
 
-        {/* External Links Section */}
-        <div>
+        {/* 2. LATEST UPDATES SECTION */}
+        <div className="mb-24">
+          <LatestUpdatesSlider updates={latestUpdates} />
+        </div>
+
+        {/* 3. EXTERNAL RESOURCES SECTION */}
+        <div className="mb-12">
           <div className="flex items-center space-x-4 mb-8">
             <div className="h-px bg-gradient-to-r from-transparent via-[#00FFA3] to-transparent flex-grow opacity-50"></div>
-            <h3 className="text-2xl font-bold text-white px-4 border border-[#00FFA3]/30 rounded-full py-1 bg-[#00FFA3]/10 backdrop-blur-sm">External Links</h3>
+            <h3 className="text-2xl font-bold text-white px-4 border border-[#00FFA3]/30 rounded-full py-1 bg-[#00FFA3]/10 backdrop-blur-sm">External Resources</h3>
             <div className="h-px bg-gradient-to-r from-transparent via-[#00FFA3] to-transparent flex-grow opacity-50"></div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {externalResources.map((resource, i) => (
+            {externalLinks.map((resource, i) => (
               <a href={resource.url} target="_blank" rel="noopener noreferrer" key={i} className="group bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 hover:border-[#00FFA3]/50 transition h-full flex flex-col hover:bg-white/[0.07]">
                 <div className="flex items-start justify-between mb-4">
                   <div className="px-3 py-1 bg-[#00FFA3]/20 text-[#00FFA3] text-sm font-semibold rounded-full">
@@ -288,12 +378,13 @@ export default function BlogSection() {
         </div>
       </div>
 
+      {/* MODALS */}
       <Dialog open={!!selectedBlog} onOpenChange={() => setSelectedBlog(null)}>
         <DialogContent className="max-w-5xl w-[90vw] bg-[#0A0E27] border-white/10 text-white p-0 overflow-hidden sm:rounded-3xl max-h-[90vh] flex flex-col">
           {selectedBlog && (
             <div className="flex-1 overflow-y-auto bg-[#0A0E27] custom-scrollbar min-h-0">
               <div className="relative h-[300px] sm:h-[400px]">
-                <img src={selectedBlog.image} alt={selectedBlog.title} title={selectedBlog.title} className="w-full h-full object-cover" />
+                <img src={selectedBlog.image} alt={selectedBlog.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E27] via-[#0A0E27]/40 to-transparent" />
                 <div className="absolute top-6 left-6 px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] text-sm font-bold rounded-full shadow-lg shadow-[#00D4FF]/20">
                   {selectedBlog.category}
@@ -317,8 +408,12 @@ export default function BlogSection() {
         onClose={() => setShowManagementModal(false)}
         blogs={blogs}
         externalLinks={externalLinks}
+        latestUpdates={latestUpdates}
+        tools={tools}
         onUpdateBlogs={handleUpdateBlogs}
         onUpdateExternalLinks={handleUpdateExternalLinks}
+        onUpdateLatestUpdates={handleUpdateLatestUpdates}
+        onUpdateTools={handleUpdateTools}
       />
     </section>
   );

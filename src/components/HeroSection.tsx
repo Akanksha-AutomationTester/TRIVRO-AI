@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import metaAdsBg from '@/assets/meta-ads-bg.jpg';
 import funnelGenieAiBg from '@/assets/funnel-genie-ai-bg.jpg';
 import aiEmailMarketingBg from '@/assets/ai-email-marketing-bg.jpg';
+import LatestUpdatesSlider from './LatestUpdatesSlider';
 
 export default function HeroSection() {
+
+  const [showUpdates, setShowUpdates] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0E27] pt-20">
       <div className="absolute inset-0 bg-gradient-to-br from-[#00D4FF]/20 via-[#8B5CF6]/10 to-[#00FFA3]/20"></div>
@@ -12,7 +17,7 @@ export default function HeroSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-7xl font-bold mb-6 text-white speakable-text">
-            <span className="bg-gradient-to-r from-[#00D4FF] via-[#8B5CF6] to-[#00FFA3] bg-clip-text text-transparent">#1 AI Marketing Tools & Meta Ads Automation Ecosystem</span>
+            <span className="bg-gradient-to-r from-[#00D4FF] via-[#8B5CF6] to-[#00FFA3] bg-clip-text text-transparent">India's Best AI Marketing Tools Ecosystem</span>
           </h1>
           <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-4xl mx-auto speakable-text">
             Build Meta Ads, Funnels, Landing Pages, Emails, Blogs & SEO Content — in Minutes. Powered by 51+ AI Tools.
@@ -30,6 +35,22 @@ export default function HeroSection() {
           </div>
         </div>
 
+
+        <div className="flex justify-center py-10">
+          <button
+            onClick={() => setShowUpdates(!showUpdates)}
+            className="px-8 py-3 bg-gradient-to-r from-[#00D4FF] to-[#0077FF] text-white font-bold rounded-lg hover:shadow-lg hover:shadow-[#00D4FF]/20 transition-all transform hover:scale-105"
+          >
+            {showUpdates ? 'Hide Updates' : 'View Latest Updates'}
+          </button>
+        </div>
+
+        {showUpdates && (
+          <div className="animate-in fade-in slide-in-from-top-10 duration-500 mb-20">
+            <LatestUpdatesSlider />
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20">
           {[
             { img: metaAdsBg, title: 'Meta Ads AI' },
@@ -46,3 +67,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
