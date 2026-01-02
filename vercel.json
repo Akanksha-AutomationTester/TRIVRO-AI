@@ -5,6 +5,17 @@
       "has": [
         {
           "type": "host",
+          "value": "www.trivro.in"
+        }
+      ],
+      "destination": "https://trivro.in/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
           "value": "www.trivro-ai-six.vercel.app"
         }
       ],
