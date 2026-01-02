@@ -1,9 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <defs>
-    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#00D4FF"/>
       <stop offset="100%" style="stop-color:#8B5CF6"/>
     </linearGradient>
   </defs>
-  <text x="50" y="72" font-family="Arial, sans-serif" font-size="52" font-weight="bold" text-anchor="middle" fill="url(#gradient)">TA</text>
+  <g fill="url(#grad)">
+    <polygon points="5,20 45,20 45,30 30,30 30,80 20,80 20,30 5,30"/>
+    <polygon points="50,20 62,20 85,80 73,80 67,62 48,62 45,52 63,52 56,32 49,52 45,62 42,80 30,80 50,20"/>
+  </g>
 </svg>
