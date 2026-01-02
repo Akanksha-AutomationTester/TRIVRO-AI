@@ -20,7 +20,7 @@ export default function HeroSection() {
             <span className="bg-gradient-to-r from-[#00D4FF] via-[#8B5CF6] to-[#00FFA3] bg-clip-text text-transparent">India's Best AI Marketing Tools Ecosystem</span>
           </h1>
 <p className="text-xl md:text-2xl text-white/80 mb-8 max-w-4xl mx-auto speakable-text">
-              Build Meta Ads, Funnels, Landing Pages, Emails, Blogs & SEO Content — in Minutes. Powered by <Link to="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">51+ AI Tools</Link>. See our <Link to="/pricing" className="text-[#00D4FF] hover:text-[#00FFA3] transition">affordable pricing</Link> or read our <Link to="/blog" className="text-[#00D4FF] hover:text-[#00FFA3] transition">expert blog</Link>.
+              Build Meta Ads, Funnels, Landing Pages, Emails, Blogs & SEO Content — in Minutes. Powered by <Link to="/tools" className="text-[#00D4FF] hover:text-[#00FFA3] transition">51+ AI Tools</Link>.
             </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <a href="https://app.trivro.in" className="px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-bold rounded-lg text-lg hover:shadow-2xl hover:shadow-[#00D4FF]/50 transition transform hover:scale-105">
