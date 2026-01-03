@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import metaAdsBg from '@/assets/meta-ads-bg.jpg';
 import funnelGenieAiBg from '@/assets/funnel-genie-ai-bg.jpg';
 import aiEmailMarketingBg from '@/assets/ai-email-marketing-bg.jpg';
@@ -8,6 +8,21 @@ import LatestUpdatesSlider from './LatestUpdatesSlider';
 export default function HeroSection() {
 
   const [showUpdates, setShowUpdates] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const goToSection = (id: string) => {
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 75);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0A0E27] pt-20">
@@ -26,12 +41,12 @@ export default function HeroSection() {
             <a href="https://app.trivro.in" className="px-8 py-4 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] text-[#0A0E27] font-bold rounded-lg text-lg hover:shadow-2xl hover:shadow-[#00D4FF]/50 transition transform hover:scale-105">
               Sign Up
             </a>
-            <a href="/#tools" className="px-8 py-4 bg-white/10 backdrop-blur-lg text-white font-bold rounded-lg text-lg border border-white/20 hover:bg-white/20 transition">
+            <button type="button" onClick={() => goToSection('tools')} className="px-8 py-4 bg-white/10 backdrop-blur-lg text-white font-bold rounded-lg text-lg border border-white/20 hover:bg-white/20 transition">
               Explore Tools
-            </a>
-            <a href="/#pricing" className="px-8 py-4 bg-white/10 backdrop-blur-lg text-white font-bold rounded-lg text-lg border border-white/20 hover:bg-white/20 transition">
+            </button>
+            <button type="button" onClick={() => goToSection('pricing')} className="px-8 py-4 bg-white/10 backdrop-blur-lg text-white font-bold rounded-lg text-lg border border-white/20 hover:bg-white/20 transition">
               View Pricing
-            </a>
+            </button>
           </div>
         </div>
 
