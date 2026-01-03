@@ -1,6 +1,6 @@
 export default function YouTubeSection() {
   const handleRegister = () => {
-    window.open('https://cal.com/trivro-ai-9zoyvj/30min', '_blank');
+    window.open('https://cal.com/trivro-ai-9zoyvj/aiopportunitycall45min', '_blank');
   };
 
   return (
