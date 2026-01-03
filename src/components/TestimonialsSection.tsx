@@ -2,12 +2,42 @@ import { Star } from 'lucide-react';
 
 export default function TestimonialsSection() {
     const testimonials = [
-      { name: 'Ankit Kumar', role: 'Business Owner', text: 'Trivro AI is a powerful all-in-one marketing platform. From funnel creation to WhatsApp automation and CRM, everything works smoothly. Beginner-friendly but still powerful enough for scaling campaigns.', rating: 5 },
-      { name: 'Jiya Sharma', role: 'Marketing Professional', text: 'Trivro AI is a game-changer for anyone looking to scale their marketing. Their ecosystem of 51+ integrated tools makes it incredibly easy to handle everything from Meta Ads automation to professional copywriting.', rating: 5 },
-      { name: 'Pragnesh Patel', role: 'Local Guide', text: 'The platform offers 51+ powerful tools that are simple to use and give excellent results. Trivro AI has helped me streamline my work, save time, and improve the quality of my output.', rating: 5 },
-      { name: 'Shivam Maheswari', role: 'Professional', text: 'Excellent service! The platform’s 51+ AI tools are extremely helpful, user-friendly, and deliver amazing results every time. Highly recommended for startups and professionals.', rating: 5 },
-      { name: 'Ayushi Bhindwale', role: 'Digital Marketer', text: 'Trivro AI actually made things much easier for me. I could create ads quickly, set up a proper funnel, and manage everything in one place without any technical issues.', rating: 5 },
-      { name: 'Ankita Rajawat', role: 'Entrepreneur', text: 'Working with Trivro AI has completely changed the way we do marketing. We finally got a proper system in place. The AI tools helped us create high-converting funnel ads and landing pages.', rating: 5 }
+      { 
+        name: 'Ankit Kumar', 
+        role: 'Business Owner', 
+        text: 'Trivro AI is a powerful all-in-one marketing platform. From funnel creation to WhatsApp automation and CRM, everything works smoothly. What I liked most is that it’s beginner-friendly but still powerful enough for scaling campaigns. If you want predictable growth without hiring a big team, Trivro AI is worth it.', 
+        rating: 5 
+      },
+      { 
+        name: 'Jiya Sharma', 
+        role: 'Marketing Professional', 
+        text: 'Trivro AI is a game-changer for anyone looking to scale their marketing. Their ecosystem of 51+ integrated tools makes it incredibly easy to handle everything from Meta Ads automation to professional copywriting. I especially appreciate the \'Creative Studio\' tools like Logo Genie and Scroll Stopping Ads AI which deliver high-quality assets in seconds. If you\'re looking for a professional, results-driven AI marketing suite in India, this is it!', 
+        rating: 5 
+      },
+      { 
+        name: 'Pragnesh Patel', 
+        role: 'Local Guide', 
+        text: 'I got Early Bird Access to Trivro AI, and it has been an amazing experience! The platform offers 51+ powerful tools that are simple to use and give excellent results. Even as an early-access user, I found the system fast, reliable, and extremely user-friendly. Trivro AI has helped me streamline my work, save time, and improve the quality of my output across multiple areas. The team is very supportive and quick to respond to feedback. Overall, a fantastic all-in-one AI platform. Highly recommended!', 
+        rating: 5 
+      },
+      { 
+        name: 'Shivam Maheswari', 
+        role: 'Professional', 
+        text: 'Excellent service by Trivro AI! The platform’s 51+ AI tools are extremely helpful, user-friendly, and deliver amazing results every time. The interface is smooth, fast, and very reliable for day-to-day business tasks. Trivro AI has made my workflow more efficient and helped me achieve better results in less time. Their support team is also very professional and quick to respond. Highly recommended for startups, creators, and professionals looking for an all-in-one AI solution!', 
+        rating: 5 
+      },
+      { 
+        name: 'Ayushi Bhindwale', 
+        role: 'Digital Marketer', 
+        text: 'Trivro AI actually made things much easier for me. I could create ads quickly, set up a proper funnel, and manage everything in one place without any technical issues.', 
+        rating: 5 
+      },
+      { 
+        name: 'Ankita Rajawat', 
+        role: 'Entrepreneur', 
+        text: 'Working with Trivro AI has completely changed the way we do marketing. Before this, we were spending a lot on agencies and ads without clear results. Everything felt scattered and confusing. After using Trivro AI, we finally got a proper system in place. The AI tools helped us create high-converting funnel ads, landing pages, and follow-up flows without needing a big team or technical skills. The results were visible within a short time, especially in lead quality and response rate. Now we feel confident running our own in-house marketing instead of depending on agencies.', 
+        rating: 5 
+      }
     ];
 
   return (
