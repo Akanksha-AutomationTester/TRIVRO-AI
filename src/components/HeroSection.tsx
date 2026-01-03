@@ -12,15 +12,27 @@ export default function HeroSection() {
   const location = useLocation();
 
   const goToSection = (id: string) => {
+    const scrollIfFound = () => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+        return true;
+      }
+      return false;
+    };
+
     if (location.pathname !== '/') {
       navigate('/');
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 75);
+      // retry scrolling a few times to wait for the home content to mount
+      let attempts = 0;
+      const maxAttempts = 6;
+      const interval = setInterval(() => {
+        attempts += 1;
+        if (scrollIfFound() || attempts >= maxAttempts) clearInterval(interval);
+      }, 100);
     } else {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      // immediate attempt, then a short retry in case of layout shifts
+      if (!scrollIfFound()) setTimeout(() => scrollIfFound(), 150);
     }
   };
 
