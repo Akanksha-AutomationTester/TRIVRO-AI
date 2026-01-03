@@ -334,6 +334,14 @@
   <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE" />
   <!-- Global site tag (gtag.js) - Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+  <style>
+    /* Prevent Flash of Unstyled Content (FOUC) by hiding static SEO elements from users */
+    #root > header, 
+    #root > main, 
+    #root > footer {
+      display: none;
+    }
+  </style>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
