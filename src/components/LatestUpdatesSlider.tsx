@@ -239,14 +239,6 @@ export default function LatestUpdatesSlider({ updates: externalUpdates }: { upda
                                     </p>
                                 )}
                             </div>
-
-                            {/* Enhanced View Button */}
-                            <div className="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center space-x-2">
-                                <div className="px-4 py-2 bg-gradient-to-r from-[#00D4FF] to-[#00FFA3] rounded-lg font-bold text-sm text-[#0A0E27] flex items-center space-x-2 shadow-lg shadow-[#00D4FF]/30">
-                                    <span>Learn More</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </div>
-                            </div>
                         </div>
                     </div>
                 ))}

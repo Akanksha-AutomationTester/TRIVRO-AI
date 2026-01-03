@@ -470,17 +470,11 @@ export default function ToolsShowcase() {
                     </div>
                   </div>
                 )}
+                </div>
               </div>
-            </div>
-          )}
-          <button
-            onClick={() => setSelectedTool(null)}
-            className="absolute top-6 right-6 p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </DialogContent>
-      </Dialog>
-    </section >
-  );
-}
+            )}
+          </DialogContent>
+        </Dialog>
+      </section >
+    );
+  }
